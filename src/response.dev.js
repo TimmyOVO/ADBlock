@@ -150,7 +150,7 @@ Console.info(`FORMAT: ${FORMAT}`);
 														} else {
 															await fixPosition().then(result => (item = result)); //小广告补位
 														}
-													} else if (cardType === "cm_double_v9" && cardGoto === "ad_inline_av") {
+													} else if ( cardGoto === "ad_inline_av") {
 														Console.log("✅ 大视频广告去除");
 														return undefined; //大广告直接去除
 													} else if (Goto === "vertical_av") {
@@ -197,7 +197,7 @@ Console.info(`FORMAT: ${FORMAT}`);
 																		return undefined;
 																	} else if (cardType === "small_cover_v10" && cardGoto === "game") {
 																		return undefined;
-																	} else if (cardType === "cm_double_v9" && cardGoto === "ad_inline_av") {
+																	} else if (cardGoto === "ad_inline_av") {
 																		return undefined;
 																	} else if (cardType === "large_cover_v9" && cardGoto === "inline_av_v2") {
 																		//补位不需要大视频
