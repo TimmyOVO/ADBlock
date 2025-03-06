@@ -102,6 +102,11 @@ Console.info(`FORMAT: ${FORMAT}`);
 										body.data.items = await Promise.all(
 											body.data.items.map(async item => {
 												const { card_type: cardType, card_goto: cardGoto, goto: Goto } = item;
+												if (item.ad_info){
+													Console.log(item);
+													Console.log("疑似广告，已去除")
+													return undefined;
+												}
 												if (cardType && cardGoto) {
 													if (["banner_v8", "banner_ipad_v8"].includes(cardType) && cardGoto === "banner") {
 														switch (Settings?.Feed?.Activity) {
@@ -140,7 +145,7 @@ Console.info(`FORMAT: ${FORMAT}`);
 															Console.log(`✅ 屏蔽Up主<${item?.args?.up_name}>直播推广`);
 															await fixPosition().then(result => (item = result)); //小广告补位
 														}
-													} else if (cardType === "cm_v2" && ["ad_player", "ad_inline_3d", "ad_inline_eggs", "ad_inline_live"].includes(cardGoto)) {
+													} else if (["cm_v2","cm_single_v1"].includes(cardType) && ["ad_player", "ad_inline_3d", "ad_inline_eggs", "ad_inline_live"].includes(cardGoto)) {
 														Console.log(`✅ ${cardGoto}广告去除`);
 														return undefined; //大广告直接去除
 													} else if (cardType === "small_cover_v10" && cardGoto === "game") {
@@ -447,6 +452,7 @@ Console.info(`FORMAT: ${FORMAT}`);
 												case true:
 												default:
 													body = ViewReply.fromBinary(rawBody);
+													Console.log("详情页Body: " + body);
 													if (body.cms?.length) {
 														Console.log("✅ 播放页广告卡片去除");
 														body.cms = [];
