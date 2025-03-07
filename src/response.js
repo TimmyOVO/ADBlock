@@ -452,7 +452,6 @@ Console.info(`FORMAT: ${FORMAT}`);
 												case true:
 												default:
 													body = ViewReply.fromBinary(rawBody);
-													Console.log("详情页Body: " + body);
 													if (body.cms?.length) {
 														Console.log("✅ 播放页广告卡片去除");
 														body.cms = [];
@@ -592,6 +591,7 @@ Console.info(`FORMAT: ${FORMAT}`);
 												case true:
 												default:
 													body = ViewUniteReply.fromBinary(rawBody);
+													Console.log("详情页Body: " + body);
 													Console.debug(`ViewUniteReply: ${JSON.stringify(body, null, 2)}`);
 													if (body.cm?.sourceContent?.length) {
 														Console.log("✅ up主推荐广告去除");
